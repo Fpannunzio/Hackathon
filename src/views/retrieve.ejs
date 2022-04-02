@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+
+<head>
+    <%- include('./partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./partials/header'); %>
+    </header>
+    <main>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="jumbotron">
+                    <h1 class="text-center">Buscar CV</h1>
+                    <hr>
+                    <p>Busca un CV</p>
+                    <form class="form" action="/retrieveCV" method="GET">
+                        <input name="cv_name" class="form-control" placeholder="Escribi el nombre del CV" type="text" required>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('./partials/footer'); %>
+    </footer>
+</body>
+
+</html>
