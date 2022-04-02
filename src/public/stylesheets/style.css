@@ -6,3 +6,16 @@ body {
 a {
   color: #00B7FF;
 }
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
+
+@page {
+  size: auto;   /* auto is the initial value */
+  margin: 0;  /* this affects the margin in the printer settings */
+}

@@ -9,14 +9,19 @@
 
     <main>
         <h1>Register!</h1>
+        <% if (locals.error) { %>
+
+            <h2><%= error%></h2>
+           
+           <% } %>
         <form class="form" action="/register" method="POST">
-            <input name="username" class="form-control" placeholder="Ingrese su nombre de usuario" type="text" required>
+            <input name="username" class="form-control" value="<%= body.username%>" placeholder="Ingrese su nombre de usuario" type="text" required>
             <br>
-            <input name="display_name" class="form-control" placeholder="Ingrese el nombre de su empresa" type="text" required>
+            <input name="display_name" class="form-control" value="<%= body.display_name%>"  placeholder="Ingrese el nombre de su empresa" type="text" required>
             <br>
-            <textarea name="desc" class="form-control" placeholder="Ingrese una breve descripcion" type="text"></textarea>
+            <textarea name="desc" class="form-control" value="<%= body.desc%>" placeholder="Ingrese una breve descripcion" type="text"></textarea>
             <br>
-            <button type="submit" class="btn btn-primary">Buscar</button>
+            <button type="submit" class="btn btn-primary">Registrarte</button>
         </form>
     </main>
 

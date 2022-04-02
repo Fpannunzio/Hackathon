@@ -25,17 +25,17 @@ router.get('/dashboard', (req, res) => {
 });
 
 router.get('/dashboard/:employer', async (req, res) => {
-  var employer = req.params.employer;
+  var employer_user = req.params.employer;
   try {
     const client = await pool.connect();
-    const employee = await client.query(`SELECT display_name FROM employer WHERE username = $1`, [employer])
+    const employer = await client.query(`SELECT * FROM employer WHERE username = $1`, [employer_user])
 
-    if(employee.rows.length == 0) {
+    if(employer.rows.length == 0) {
       res.redirect('/register')
       return
     }
     const result = await client.query(`SELECT employer, employee, id FROM resumes WHERE employer = $1`, [employer])
-    const results = { 'results': (result) ? result.rows : null };
+    const results = { 'results': (result) ? result.rows : null , 'employer': employer.rows[0]};
 
     res.render('dashboard', results);
     client.release();
@@ -45,26 +45,30 @@ router.get('/dashboard/:employer', async (req, res) => {
   }
 })
 
-router.get("/qr/:employer", (req, res) => {
-  
-  console.log(req.get('host'))
+router.get("/qr/:employer", async (req, res) => {
 
-  const qrurl = req.get('host') + '/upload?employer=' + req.params.employer
+  const employer_user = req.params.employer
+  const qrurl = req.get('host') + '/upload?employer=' + employer_user
 
-  // If the input is null return "Empty Data" error
-  if (qrurl.length === 0) res.send("Empty Data!");
+  try {
+    const client = await pool.connect();
+    const employer = await client.query(`SELECT * FROM employer WHERE username = $1`, [employer_user])
 
-  // Let us convert the input stored in the url and return it as a representation of the QR Code image contained in the Data URI(Uniform Resource Identifier)
-  // It shall be returned as a png image format
-  // In case of an error, it will save the error inside the "err" variable and display it
+    if(employer.rows.length == 0) {
+      res.redirect('/register')
+      return
+    }
 
-  qr.toDataURL(qrurl, (err, src) => {
-    if (err) res.send("Error occured");
+    const qrdata = await qr.toDataURL(qrurl)
+    res.render("qr", { qrdata, "employer": employer.rows[0] });
 
-    console.log(src)
-    // Let us return the QR code image as our response and set it to be the source used in the webpage
-    res.render("qr", { src });
-  });
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+
+
 });
 
 router.get('/cv/:id', async function (req, res, next) {
@@ -91,16 +95,15 @@ router.get('/about', function (req, res, next) {
 });
 
 router.get('/register', function (req, res, next) {
-  res.render('register', {});
+  res.render('register', {"body": {}});
 });
 
 router.post('/register', async (req, res) => {
 
     const body = req.body
-    console.log(body)
 
     if (!body.username || !body.display_name) {
-      return res.status(400).send('Missing values.');
+      return res.render('register', {"body": body, "error": "Nombre de la empresa y de usuario son requeridos."});
     }
 
     const client = await pool.connect();
@@ -109,13 +112,13 @@ router.post('/register', async (req, res) => {
       const employer = await client.query('SELECT * from employer where username = $1', [body.username]);
       
       if(employer.rows.length > 0) {
-        res.status(400).send('Username taken');
+        return res.render('register', {"body": body, "error": 'El nombre de usuario ya esta en uso'});
         return;
       }
 
       await client.query('INSERT INTO employer (username, display_name, description) VALUES ($1, $2, $3)',
       [body.username, body.display_name, body.desc]);
-      res.render('upload_success', { });
+      res.redirect(`/dashboard/${body.username}`);
 
     } catch (err) {
       console.error(err);
@@ -129,20 +132,17 @@ router.get('/login', function (req, res, next) {
 
 router.get('/upload', function (req, res, next) {
   var employer = req.query.employer;
-  console.log(employer)
   res.render('upload', {"employer": employer});
 });
 
 router.post("/upload", async (req, res) => {
 
   const body = req.body
-  console.log(body)
   if (!req.files || Object.keys(req.files).length === 0 || !body.employer || !body.employee) {
     return res.status(400).send('No files were uploaded.');
   }
   var cv = req.files.cv;
   var name = cv.name.substr(0, cv.name.indexOf('.'));
-  console.log(name, cv.data);
   const client = await pool.connect();
   try{
     await client.query('INSERT INTO resumes (filename, data, mime_type, employer, employee) VALUES ($1, $2, $3, $4, $5)',
