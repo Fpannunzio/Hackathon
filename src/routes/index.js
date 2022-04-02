@@ -2,6 +2,7 @@ var express = require('express');
 const pool = require('../db')
 const qr = require('qrcode');
 const { render } = require('ejs');
+const url = require('url')
 var router = express.Router();
 
 /* GET home page. */
@@ -85,22 +86,29 @@ router.get('/retrieve', async (req, res) => {
 })
 
 router.get('/retrieveCV', async (req, res) => {
-  var cv_name = req.body.cv_name;
+  var cv_name = req.query.cv_name;
   console.log(cv_name)
-  // try {
-  //   const client = await pool.connect();
-  //   const result = await client.query('select * from resumes where filename ILIKE $1',
-  //   [cv_name],
-  //   function (err, writeResult) {
-  //     console.log('err', err, 'pg writeResult', writeResult);
-  //   });
-  //   const results = { 'results': (result) ? result.rows : null };
-  //   res.render('db', results);
-  //   client.release();
-  // } catch (err) {
-  //   console.error(err);
-  //   res.send("Error " + err);
-  // }
+  try {
+    const client = await pool.connect();
+    const result = await client.query('select * from resumes where filename = $1',
+    [cv_name])
+    // ,function (err, writeResult) {
+    //   console.log('err', err, 'pg writeResult', writeResult);
+    // });
+    
+    const results = { 'results': (result) ? result.rows : null };
+    res.set("Content-Type", "application/pdf");
+    res.send(results.results[0].data);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
 })
+
+router.get('/renderCV', async (req, res) => {
+  res.render('cv', {});
+})
+
 
 module.exports = router;

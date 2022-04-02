@@ -17,7 +17,9 @@
     "morgan": "~1.9.1",
     "passport": "^0.5.2",
     "passport-google-oauth": "^2.0.0",
+    "pdfjs": "^2.4.7",
     "pg": "^8.7.3",
+    "puppeteer": "^13.5.2",
     "qrcode": "^1.5.0"
   },
   "devDependencies": {
