@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+
+<head>
+    <%- include('./partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./partials/header'); %>
+    </header>
+    <main>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="jumbotron">
+                    <h1 class="text-center">Deja aca tu CV</h1>
+                    <hr>
+                    <form ref='uploadForm' id='uploadForm' action='/uploadCV' method='post'
+                        encType="multipart/form-data">
+                        <input type="file" name="cv" />
+                        <br>
+                        <button type='submit' class="btn btn-primary" value='Upload!' >Upload</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('./partials/footer'); %>
+    </footer>
+</body>
+
+</html>

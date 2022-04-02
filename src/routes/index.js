@@ -27,6 +27,26 @@ router.get('/qrtest', function(req, res, next) {
   res.render('qrtest', { title: 'Express' });
 });
 
+router.get('/upload', function(req, res, next) {
+  res.render('upload', {});
+});
+
+router.post("/uploadCV", (req, res) => {
+
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send('No files were uploaded.');
+  }
+  
+  var cv = req.files.cv;
+  console.log(cv.name)
+  // If the input is null return "Empty Data" error
+  
+  // Let us convert the input stored in the url and return it as a representation of the QR Code image contained in the Data URI(Uniform Resource Identifier)
+  // It shall be returned as a png image format
+  // In case of an error, it will save the error inside the "err" variable and display it
+  res.render('cv', {file: cv});
+});
+
 router.get('/db', async (req, res) => {
   try {
     const client = await pool.connect();
