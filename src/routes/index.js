@@ -28,8 +28,15 @@ router.get('/dashboard/:employer', async (req, res) => {
   var employer = req.params.employer;
   try {
     const client = await pool.connect();
+    const employee = await client.query(`SELECT display_name FROM employer WHERE username = $1`, [employer])
+
+    if(employee.rows.length == 0) {
+      res.redirect('/register')
+      return
+    }
     const result = await client.query(`SELECT employer, employee, id FROM resumes WHERE employer = $1`, [employer])
     const results = { 'results': (result) ? result.rows : null };
+
     res.render('dashboard', results);
     client.release();
   } catch (err) {
@@ -81,6 +88,39 @@ router.get('/cv/:id', async function (req, res, next) {
 
 router.get('/about', function (req, res, next) {
   res.render('about', { title: 'Express' });
+});
+
+router.get('/register', function (req, res, next) {
+  res.render('register', {});
+});
+
+router.post('/register', async (req, res) => {
+
+    const body = req.body
+    console.log(body)
+
+    if (!body.username || !body.display_name) {
+      return res.status(400).send('Missing values.');
+    }
+
+    const client = await pool.connect();
+
+    try{
+      const employer = await client.query('SELECT * from employer where username = $1', [body.username]);
+      
+      if(employer.rows.length > 0) {
+        res.status(400).send('Username taken');
+        return;
+      }
+
+      await client.query('INSERT INTO employer (username, display_name, description) VALUES ($1, $2, $3)',
+      [body.username, body.display_name, body.desc]);
+      res.render('upload_success', { });
+
+    } catch (err) {
+      console.error(err);
+      res.send("Error " + err);
+    }
 });
 
 router.get('/login', function (req, res, next) {
