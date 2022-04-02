@@ -20,7 +20,8 @@
     "pdfjs": "^2.4.7",
     "pg": "^8.7.3",
     "puppeteer": "^13.5.2",
-    "qrcode": "^1.5.0"
+    "qrcode": "^1.5.0",
+    "uikit": "^3.13.7-dev.120e5ee9c"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
