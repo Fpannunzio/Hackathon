@@ -2,46 +2,56 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/css/uikit.min.css" />
-
-    <!-- UIkit JS -->
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>
     <%- include('./partials/head'); %>
 </head>
 
-<body class="container">
-
+<body class="container" style="background-color: azure;">
     <header>
         <%- include('./partials/header'); %>
     </header>
-
     <main>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="jumbotron">
-                    <h1>This is great</h1>
-                    <a class="uk-button uk-button-default" href="">button</a>
-                    <p>Welcome to templating using EJS</p>
-                    <ul>
-                        <% mascots.forEach(function(mascot) { %>
-                            <li>
-                                <strong>
-                                    <%= mascot.name %>
-                                </strong>
-                                representing <%= mascot.organization %>, born <%= mascot.birth_year %>
-                            </li>
-                            <% }); %>
+        <div class="uk-margin-medium-top" uk-grid>
+            <div class="uk-align-center uk-width-2-3">
+                <div>
+                    <h1 style="text-align: center; color:blueviolet;">¡Bienvenido a Tira CV!</h1>
+                    <p class="uk-text-meta uk-text-break" style="text-align: center; color:blueviolet;">Con Tira CV,
+                        contratar es mucho mas facil. Consegui tu codigo QR para que todos tus candidatos te dejen su
+                        curriculum en un mismo lugar. Vas a poder encontrar todas las propuestas en tu pagina de
+                        candidatos.
+                    </p>
+                    <hr>
+                    <h4 style="text-align: center; color:blueviolet;">Todos los curriculums 
+                        de tus candidatos en un mismo lugar</h4>
+                </div>
+                <div class="uk-flex uk-flex-center uk-margin-medium-top">
+                    <ul uk-accordion="collapsible: false">
+                        <li>
+                            <a class="uk-accordion-title" style="color:blueviolet;" href="#">Ignacio Vazquez</a>
+                            <div class="uk-accordion-content">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="uk-accordion-title" style="color:blueviolet;" href="#">Nicolas Rampoldi
+                            </a>
+                            <div class="uk-accordion-content">
+                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                                    ea commodo consequat. Duis aute irure dolor reprehenderit.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="uk-accordion-title" style="color:blueviolet;" href="#">Francisco Bernad</a>
+                            <div class="uk-accordion-content">
+                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.</p>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </main>
-
-    <footer>
-        <%- include('./partials/footer'); %>
-    </footer>
-
 </body>
 
 </html>
