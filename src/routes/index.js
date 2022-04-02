@@ -1,4 +1,5 @@
 var express = require('express');
+const pool = require('../db')
 var router = express.Router();
 
 /* GET home page. */
@@ -20,5 +21,18 @@ router.get('/', function(req, res, next) {
 router.get('/about', function(req, res, next) {
   res.render('about', { title: 'Express' });
 });
+
+router.get('/db', async (req, res) => {
+  try {
+    const client = await pool.connect();
+    const result = await client.query('SELECT * FROM test_table');
+    const results = { 'results': (result) ? result.rows : null};
+    res.render('db', results );
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+})
 
 module.exports = router;
