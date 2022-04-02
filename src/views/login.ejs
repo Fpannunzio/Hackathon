@@ -5,16 +5,33 @@
     <%- include('./partials/head'); %>
 </head>
 
-<body class="container">
-
+<body class="container" style="background-color: azure;">
+    <header>
+        <%- include('./partials/header'); %>
+    </header>
     <main>
-        <form class="form" action="/dashboard" method="GET">
-            <input name="employer" class="form-control" placeholder="Ingrese su nombre de usuario" type="text" required>
-            <br>
-            <button type="submit" class="btn btn-primary">Buscar</button>
-        </form>
+        <div class="uk-margin-medium-top" uk-grid>
+            <div class="uk-align-center uk-width-2-3">
+                <div>
+                    <h1 style="text-align: center; color:blueviolet;">Empeza a usar Tira CV!</h1>
+                    <hr>
+                    <form class="form" action="/dashboard" method="GET">
+                        <fieldset class="uk-fieldset">
+                            <legend class="uk-legend" style="color:blueviolet;">Entra con tu nombre de usuario</legend>
+                    
+                            <div class="uk-margin">
+                                <input name="employer" class="uk-input form-control" placeholder="Ingrese su nombre de usuario"
+                                type="text" required>
+                            </div>
+                            <div class="uk-align-center uk-width-1-2">     
+                                <button type="submit" class="uk-button uk-button-default uk-border-rounded extended-button" style="color:blueviolet; background-color: azure;">Entrar</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
     </main>
-
 </body>
 
 </html>
