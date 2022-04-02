@@ -27,9 +27,10 @@
     <div class="container">
         <h1 class="text-center">QR CODE GENERATOR</h1>
         <hr>
-        <img src=<%=src%> alt="QR Code Image">
+        <img src="<%=src%>" width="500" height="600" alt="QR Code Image">
         <p>Scan the QR Code to access data!</p>
-        <a href="/"><button type="button" class="btn btn-primary">Back</button></a>
+        <div><button onClick="window.print()">Print this page
+        </button></div>
         <br>
     </div>
 </body>
