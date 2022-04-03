@@ -1,14 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 
-body {
-  padding: 50px;
-  font: 14px "Roboto", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
-
 @media print
 {    
     .no-print, .no-print *
