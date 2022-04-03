@@ -5,26 +5,49 @@
     <%- include('./partials/head'); %>
 </head>
 
-<body class="container">
-
+<body class="container" style="background-color: azure;">
+    <header>
+        <%- include('./partials/header'); %>
+    </header>
     <main>
-        <h1>Register!</h1>
-        <% if (locals.error) { %>
+        <div class="uk-margin-medium-top" uk-grid>
+            <div class="uk-align-center uk-width-2-3">
+                <div>
+                    <h1 class="uk-margin-small-bottom" style="text-align: center; color:blueviolet;">Registrate</h1>
+                    <h2 class="uk-margin-remove uk-text-small" style="text-align: center; color:blueviolet;">y empeza a usar Tira CV</h2>
+                    <hr>
+                    <form class="form" action="/register" method="POST">
+                        <fieldset class="uk-fieldset">
+                    
+                            <% if (locals.error) { %>
+                                <h2><%= error%></h2>
+                               <% } %>
 
-            <h2><%= error%></h2>
-           
-           <% } %>
-        <form class="form" action="/register" method="POST">
-            <input name="username" class="form-control" value="<%= body.username%>" placeholder="Ingrese su nombre de usuario" type="text" required>
-            <br>
-            <input name="display_name" class="form-control" value="<%= body.display_name%>"  placeholder="Ingrese el nombre de su empresa" type="text" required>
-            <br>
-            <textarea name="desc" class="form-control" value="<%= body.desc%>" placeholder="Ingrese una breve descripcion" type="text"></textarea>
-            <br>
-            <button type="submit" class="btn btn-primary">Registrarte</button>
-        </form>
+                            <div class="uk-margin">
+                                <input name="username" class="uk-input" placeholder="Ingrese su nombre de usuario"
+                                type="text" value="<%= body.username%>" required>
+                            </div>
+                            <div class="uk-margin">
+                                <input name="display_name" class="uk-input" placeholder="Ingrese el nombre de su empresa"
+                                type="text" value="<%= body.display_name%>" required>
+                            </div>
+                            
+                            <div class="uk-margin">
+                                <textarea name="desc" class="uk-textarea" value="<%= body.desc%>" 
+                                    placeholder="Ingrese una breve descripcion" type="text"></textarea>
+                            </div>
+
+
+                            <div class="uk-align-center uk-width-1-2">     
+                                <button type="submit" class="uk-button uk-button-default uk-border-rounded extended-button" style="color:blueviolet; background-color: azure;">Registrar</button>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
     </main>
-
 </body>
 
 </html>

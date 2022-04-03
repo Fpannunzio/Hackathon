@@ -1,22 +1,40 @@
 <!DOCTYPE html>
 <html>
-<head>
-</head>
+    <head>
+        <%- include('./partials/head'); %>
+    </head>
 
 <body>
 
+<main>
+    <div class="uk-margin-medium-top" uk-grid>
+        <div class="uk-align-center uk-width-2-3">
+            <h1 style="text-align: center; color:blueviolet;"><%= employer.display_name %></h1>
+            <h2 class="uk-text-small" style="text-align: center; color:blueviolet;">
+                <a href="/qr/<%= employer.username %>">Visualizar codigo QR</a>
+            </h2>
+            <hr>
+            <div class="uk-flex uk-flex-center uk-margin-medium-top">
+                <% if (results.length == 0) { %>
 
-<div class="container">
-<h2><%= employer.display_name %></h2>
-<a href="/qr/<%= employer.username %>">Ver QR</a>
-
-<ul>
-    <% results.forEach(function(r) { %>
-        <li><a href="/cv/<%= r.id %>"><%= r.employee %></a></li>
-    <% }); %>
-</ul>
-
-</div>
+                    <h2 style="text-align: center;">Todavia no hay ningun CV esperandote, acordate de imprimir <a href="/qr/<%= employer.username %>">tu codigo QR </a> y publicarlo.</h2>
+                   
+                   <% } else { %>
+                <ul uk-accordion style="width: 100%;">
+                    <% results.forEach(function(r) { %>
+                    <li>
+                        <a class="uk-accordion-title" style="color:blueviolet;" href="#"><%= r.employee %></a>
+                        <div class="uk-accordion-content">
+                            <embed src="/cv/<%= r.id %>" width="100%" height="2100px" />
+                        </div>
+                    </li>
+                    <% }); %>
+                </ul>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</main>
 
 </body>
 </html>

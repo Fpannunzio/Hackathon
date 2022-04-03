@@ -34,7 +34,7 @@ router.get('/dashboard/:employer', async (req, res) => {
       res.redirect('/register')
       return
     }
-    const result = await client.query(`SELECT employer, employee, id FROM resumes WHERE employer = $1`, [employer])
+    const result = await client.query(`SELECT employer, employee, id FROM resumes WHERE employer = $1`, [employer_user])
     const results = { 'results': (result) ? result.rows : null , 'employer': employer.rows[0]};
 
     res.render('dashboard', results);
@@ -113,7 +113,6 @@ router.post('/register', async (req, res) => {
       
       if(employer.rows.length > 0) {
         return res.render('register', {"body": body, "error": 'El nombre de usuario ya esta en uso'});
-        return;
       }
 
       await client.query('INSERT INTO employer (username, display_name, description) VALUES ($1, $2, $3)',
