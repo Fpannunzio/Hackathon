@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <%- include('./partials/head'); %>
+    </head>
 
-<main>
-    <div class="jumbotron">
-        <h1>This is error</h1>
-        <p>Welcome to templating using EJS</p>
-    </div>
+<body class="container" style="background-color: azure;">
+    <header>
+        <%- include('./partials/header'); %>
+    </header>
+    <main>
+        <div class="uk-margin-medium-top" uk-grid>
+            <div class="uk-align-center uk-width-2-3">
+                <div>
+                    <h1 style="text-align: center; color:blueviolet;">Ocurrio un error</h1>
+                    <p class="uk-text-meta uk-text-break" style="text-align: center; color:blueviolet;">
+                        Ocurrio un error inesperado procesando su pedido. Puede a empezar desde el <a href="/">inicio</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
 </main>
 </body>
 </html>
