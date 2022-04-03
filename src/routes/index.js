@@ -31,7 +31,7 @@ router.get('/dashboard/:employer', async (req, res) => {
     const employer = await client.query(`SELECT * FROM employer WHERE username = $1`, [employer_user])
 
     if(employer.rows.length == 0) {
-      res.redirect('/register')
+      res.render('login', {"error": "Usuario no registrado"})
       return
     }
     const result = await client.query(`SELECT employer, employee, id FROM resumes WHERE employer = $1`, [employer_user])

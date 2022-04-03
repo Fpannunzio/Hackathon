@@ -18,7 +18,9 @@
                     <form class="form" action="/dashboard" method="GET">
                         <fieldset class="uk-fieldset">
                             <legend class="uk-legend" style="color:blueviolet;">Entra con tu nombre de usuario</legend>
-                    
+                            <% if (locals.error) { %>
+                                <p class="uk-text-default uk-text-danger"><%= error%></p>
+                               <% } %>
                             <div class="uk-margin">
                                 <input name="employer" class="uk-input form-control" placeholder="Ingrese su nombre de usuario"
                                 type="text" required>
