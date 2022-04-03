@@ -1,32 +1,39 @@
 <!doctype html>
 <html lang="en">
-
-
 <head>
     <%- include('./partials/head'); %>
 </head>
 
-<body class="container">
-
+<body class="container" style="background-color: azure;">
     <header>
         <%- include('./partials/header'); %>
     </header>
     <main>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="jumbotron">
-                    <h1 class="text-center">Deja aca tu CV</h1>
+        <div class="uk-margin-medium-top" uk-grid>
+            <div class="uk-align-center uk-width-2-3">
+                <div>
+                    <h1 style="text-align: center; color:blueviolet;">Deja aca tu CV!</h1>
                     <hr>
-                    <form ref='uploadForm' id='uploadForm' action='/upload' method='post'
-                        encType="multipart/form-data">
-                        <input hidden type="text" name="employer" value="<%= employer %>"/>
-                        <label for="employee">Employee</label>
-                        <input type="text" id="employee" name="employee"/>
-                        <br>
-                        <label for="employee">Resumee</label>
-                        <input type="file" id="cv" name="cv" />
-                        <br>
-                        <button type='submit' class="btn btn-primary" value='Upload!' >Upload</button>
+                    <form ref='uploadForm' id='uploadForm' action='/upload' method='post' encType="multipart/form-data">
+                        <fieldset class="uk-fieldset">
+                            <input hidden type="text" name="employer" value="<%= employer %>" />
+                            <div>
+                                <legend class="uk-legend uk-margin-small-bottom" style="color:blueviolet;">Empleado:</legend>
+                                <input name="employee" class="uk-input" placeholder="Ingresa tu nombre" type="text"
+                                    id="employee" required>
+                            </div>
+                            <div class="uk-margin-small-top" uk-form-custom="target: true">
+                                <legend class="uk-legend uk-margin-small-bottom" style="color:blueviolet;">CV:</legend>
+                                <input type="file" id="cv" name="cv">
+                                <input class="uk-input uk-form-width-medium" type="text" placeholder="Select file"
+                                    disabled>
+                            </div>
+                            <div class="uk-align-center uk-width-1-2">
+                                <button type="submit"
+                                    class="uk-button uk-button-default uk-border-rounded extended-button"
+                                    style="color:blueviolet; background-color: azure;">Enviar</button>
+                            </div>
+                        </fieldset>
                     </form>
                 </div>
             </div>
