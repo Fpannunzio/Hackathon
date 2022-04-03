@@ -14,13 +14,13 @@
             <div class="uk-align-center uk-width-2-3">
                 <div>
                     <h1 class="uk-margin-small-bottom" style="text-align: center; color:blueviolet;">Registrate</h1>
-                    <h2 class="uk-margin-remove uk-text-small" style="text-align: center; color:blueviolet;">y empeza a usar Tira CV</h2>
+                    <h2 class="uk-margin-remove uk-text-meta" style="text-align: center; color:blueviolet;">y empeza a usar Tira CV</h2>
                     <hr>
                     <form class="form" action="/register" method="POST">
                         <fieldset class="uk-fieldset">
                     
                             <% if (locals.error) { %>
-                                <h2><%= error%></h2>
+                                <h2 class="uk-text-default" style="color:red;"><%= error%></h2>
                                <% } %>
 
                             <div class="uk-margin">
@@ -33,8 +33,8 @@
                             </div>
                             
                             <div class="uk-margin">
-                                <textarea name="desc" class="uk-textarea" value="<%= body.desc%>" 
-                                    placeholder="Ingrese una breve descripcion" type="text"></textarea>
+                                <textarea name="desc" class="uk-textarea"
+                                    placeholder="Ingrese una breve descripcion" type="text"><%= body.desc%></textarea>
                             </div>
 
 
