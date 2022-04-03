@@ -10,17 +10,43 @@
         <%- include('./partials/header'); %>
     </header>
     <main>
-        <div class="uk-margin-medium-top" uk-grid>
+        <div uk-grid>
+            <!-- <div class="uk-background-cover uk-height-large uk-panel uk-flex uk-flex-center uk-flex-middle" style="background-image: url(images/cover.jpg);">
+                <h1 style="text-align: center; color:blueviolet;">¡Bienvenido a Tira CV!</h1>
+                <p class="uk-text-meta uk-text-break" style="text-align: center; color:blueviolet;">Con Tira CV,
+                    contratar es mucho mas facil. Consegui tu codigo QR para que todos tus candidatos te dejen su
+                    curriculum en un mismo lugar.
+                </p>
+            </div> -->
+            <div class="uk-inline">
+                <img src="images/cover.jpg" width="1800" height="1200" alt="">
+                <div class="uk-overlay-default uk-position-cover"></div>
+                <div class="uk-overlay uk-position-center uk-light">
+                    <!-- <h1 style="text-align: center; color:blueviolet;">¡Bienvenido a Tira CV!</h1> -->
+                    <p class="uk-text-meta uk-margin-auto uk-text-break" style="width: 70%; font-size: 4rem; color:blueviolet;">
+                        Ahora contratar es mucho mas facil. Genera tu codigo QR para que todos tus candidatos te dejen su
+                        curriculum en un mismo lugar.
+                    </p>
+                </div>
+            </div>
             <div class="uk-align-center uk-width-2-3">
                 <div>
-                    <h1 style="text-align: center; color:blueviolet;">¡Bienvenido a Tira CV!</h1>
-                    <p class="uk-text-meta uk-text-break" style="text-align: center; color:blueviolet;">Con Tira CV,
-                        contratar es mucho mas facil. Consegui tu codigo QR para que todos tus candidatos te dejen su
-                        curriculum en un mismo lugar. Vas a poder encontrar todas las propuestas en tu pagina de
-                        candidatos.
-                    </p>
+
+                    <ul class="uk-list">
+                        <li class="uk-text-large" style="text-align: center; color:blueviolet;">1 - Registra tu empresa
+                            en Tira CV</li>
+                        <li class="uk-text-large" style="text-align: center; color:blueviolet;">2 - Obtene el codigo QR
+                        </li>
+                        <li class="uk-text-large" style="text-align: center; color:blueviolet;">3 - Pegalo en la puerta
+                            de tu local</li>
+                        <li class="uk-text-large" style="text-align: center; color:blueviolet;">4 - Visualiza las
+                            aplicaciones recibidas</li>
+                    </ul>
+
+                    <h3>Todo esto con solo 4 pasos! Que estas esperando?</h3>
+
                     <hr>
-                    <h4 style="text-align: center; color:blueviolet;">Todos los curriculums 
+                    <h4 style="text-align: center; color:blueviolet;">Todos los curriculums
                         de tus candidatos en un mismo lugar</h4>
                 </div>
                 <div class="uk-flex uk-flex-center uk-margin-medium-top">
@@ -43,7 +69,7 @@
                             <div class="uk-accordion-content">
                                 <embed src="cv1.pdf" width="100%" height="2100px" />
                             </div>
-                        </li> 
+                        </li>
                     </ul>
                 </div>
             </div>
